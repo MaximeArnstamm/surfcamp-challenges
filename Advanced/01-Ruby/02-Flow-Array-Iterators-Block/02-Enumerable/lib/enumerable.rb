@@ -33,13 +33,13 @@ end
 def product(array)
   # TODO: Calculate the product of an array of numbers.
   #       You should use of Enumerable#reduce
-  array.reduce(:*)
+  array.reduce &:*
 end
 
 def sorted_pairs(array)
   # TODO: Reorganize an array into slices of 2 elements, and sort each slice alphabetically.
   #       You should make use of Enumerable#each_slice
-  array.each_slice(2).map { |a| a.sort }
+  array.each_slice(2).map &:sort
 end
 
 
