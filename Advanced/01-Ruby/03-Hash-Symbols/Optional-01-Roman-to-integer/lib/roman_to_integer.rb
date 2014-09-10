@@ -23,10 +23,3 @@ def roman_to_integer(roman_string)
   end
 end
 
-# testing your program
-puts roman_to_integer("II")
-puts roman_to_integer("IV")
-puts roman_to_integer("IV") == 4 # => true
-puts roman_to_integer("XII") == 12 # => true
-puts roman_to_integer("XIX") == 19 # => true
-puts roman_to_integer("XVIII")
