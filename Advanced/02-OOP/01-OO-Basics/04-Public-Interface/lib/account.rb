@@ -1,3 +1,5 @@
+require_relative "transaction"
+
 # This is how you define your own custom exception classes
 class DepositError < StandardError
 end
@@ -11,6 +13,8 @@ class BankAccount
   # - you can print transactions only with a password
   # - you can withdraw or deposit money
   # - You can see the balance of the account (through the position variable)
+
+  attr_reader :position, :name
 
   MIN_DEPOSIT =  100
 
@@ -26,33 +30,47 @@ class BankAccount
 
   def withdraw(amount)
     # TODO: Call add_transaction with the right argument
+    add_transaction(amount * -1)
     # TODO: returns a string with a message
+    "#{amount} euros withdrawn"
   end
 
   def deposit(amount)
     # TODO: Call add_transaction with the right argument
+    add_transaction(amount)
     # TODO: returns a string with a message
+    "#{amount} euros deposited"
   end
 
   def transactions_history(args = {})
     # TODO: Check if there is a password and if so if it is correct
-    # TODO: return a string displaying the transactions, BUT NOT return the transaction array !
+    if (!args[:password])
+      "no password given"
+    elsif (args[:password] != @password)
+      "wrong password"
+    else
+      @transactions.to_s
+    end
   end
 
   def iban
     # TODO: Hide the middle of the IBAN like FR14**************606 and return it
+    "#{@iban.slice(0..3)}**************#{@iban.slice(-3..-1)}"
   end
 
   def to_s
     # Method used when printing account object as string (also used for string interpolation)
     # TODO: Displays the account owner, the hidden iban and the position of the account
+    "Owner: #{@name}\nIBAN: #{iban}\nCurrent amount : #{@position}"
+
   end
 
   private
 
   def add_transaction(amount)
     # TODO: add the amount in the transactions array
+    @transactions << Transaction.new(amount)
     # TODO: update the current position (which represents the balance of the account)
+    @position += amount
   end
-
 end
