@@ -1,6 +1,8 @@
 class Playboy
 
   #TODO: implement necessary getters or setters to run meeting_casanova.rb
+  attr_reader :conquests, :nationality
+  attr_accessor :name, :hair_length, :married
 
   INITIAL_HAIR_LENGTH = 20  # beautiful long playboy hair
 
